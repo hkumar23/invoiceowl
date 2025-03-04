@@ -56,7 +56,7 @@ abstract class InvoiceBottomsheet {
                           style: theme.textTheme.bodyLarge,
                         ),
                         Text(
-                          'Invoice Date: ${DateFormat('dd-MM-yyyy').format(invoice.invoiceDate!)}',
+                          'Invoice Date: ${DateFormat('dd MMM yyyy').format(invoice.invoiceDate!)}',
                           style: theme.textTheme.bodyLarge,
                         ),
                         Text(

@@ -259,7 +259,7 @@ abstract class GeneratePdf {
                         style: defaultTextStyle,
                       ),
                       pw.Text(
-                        'Invoice Date: ${DateFormat('dd-MM-yyyy').format(invoice.invoiceDate!)}',
+                        'Invoice Date: ${DateFormat('dd MMM yyyy').format(invoice.invoiceDate!)}',
                         style: defaultTextStyle,
                       ),
                       pw.Text(

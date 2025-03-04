@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:invoiceowl/presentation/widgets/settings_components/generate_qr_bottomsheet.dart';
 
 import '../../widgets/settings_components/support_dev_button.dart';
 import '../../../utils/custom_top_snackbar.dart';
@@ -141,6 +142,20 @@ class SettingsScreen extends StatelessWidget {
                   Icons.arrow_forward_ios,
                   size: 20,
                 ),
+              ),
+              ListTile(
+                title: const Text('Generate QR Code'),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios,
+                  size: 20,
+                ),
+                onTap: () {
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (context) {
+                        return const GenerateQrBottomSheet();
+                      });
+                },
               ),
               const SupportDevButton(),
             ],

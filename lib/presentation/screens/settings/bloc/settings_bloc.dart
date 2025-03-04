@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:invoiceowl/data/repositories/business_repo.dart';
 
 import '../../../../constants/app_language.dart';
 import '../../../../constants/app_constants.dart';
@@ -18,9 +19,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   void _onSaveBusinessInfoEvent(event, emit) async {
     emit(SettingsLoadingState());
     try {
-      // final UserRepo userRepo = UserRepo();
-      // await userRepo.updateBusinessInfo(event.business);
-      // await businessRepo.saveBusinessInfo(event.business);
+      final businessRepo = BusinessRepo();
+      businessRepo.saveBusinessInfo(event.business);
+
       emit(BusinessInfoSavedState());
     } catch (err) {
       debugPrint(err.toString());
@@ -33,7 +34,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   _onSaveUpiIdEvent(event, emit) async {
     emit(SettingsLoadingState());
     try {
-      // await UserRepo().saveUpiId(event.upiId);
+      await BusinessRepo().saveUpiId(event.upiId);
+
       emit(UpiIdSavedState());
     } catch (err) {
       debugPrint(err.toString());
