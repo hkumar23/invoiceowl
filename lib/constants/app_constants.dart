@@ -56,4 +56,5 @@ class AppConstants {
   static const String syncStatus = "syncStatus";
   static const String supportDevUpi = "hkumar2way@oksbi";
   static const String businessBox = "businessBox";
+  static const String feedbackEmail = "codeworksinfinity@gmail.com";
 }

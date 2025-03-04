@@ -25,6 +25,8 @@ class UpdateNameAndImageEvent extends SettingsEvent {
   final String? imageUrl;
   UpdateNameAndImageEvent({required this.fullName, required this.imageUrl});
 }
+
+class SendFeedbackEvent extends SettingsEvent {}
 // class GenerateQrEvent extends SettingsEvent {
 //   final String amount;
 //   GenerateQrEvent({required this.amount});

@@ -27,6 +27,8 @@ class ImageUploadedState extends SettingsState {
 }
 
 class NameAndImageUpdatedState extends SettingsState {}
+
+class EmailAppOpenedAndClosedState extends SettingsState {}
 // class QrGeneratedState extends SettingsState {
 //   final String amount;
 //   final String businessName;

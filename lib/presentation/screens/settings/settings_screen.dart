@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:invoiceowl/constants/app_constants.dart';
+import 'package:invoiceowl/presentation/screens/settings/bloc/settings_event.dart';
 import 'package:invoiceowl/presentation/widgets/settings_components/generate_qr_bottomsheet.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../widgets/settings_components/support_dev_button.dart';
 import '../../../utils/custom_top_snackbar.dart';
@@ -67,49 +70,63 @@ class SettingsScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 20),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const CircleAvatar(
-                    radius: 40,
-                    backgroundImage: NetworkImage(
-                      "https://cdn-icons-png.flaticon.com/512/3135/3135768.png",
+              GestureDetector(
+                onTap: () {
+                  BlocProvider.of<SettingsBloc>(context)
+                      .add(SendFeedbackEvent());
+                },
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 5,
+                        vertical: 10,
+                      ),
+                      child: Image.asset(
+                        "assets/logo/invoiceowl_logo_abstract.png",
+                        height: 70,
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 15),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Your Name",
-                        style: theme.textTheme.headlineSmall!.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        "temporary@email.com",
-                        style: TextStyle(color: Colors.grey[600]),
-                      ),
-                      const SizedBox(height: 8),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 5,
-                        ),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: theme.colorScheme.primary,
+                    const SizedBox(width: 15),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Invoice Owl",
+                          style: theme.textTheme.headlineSmall!.copyWith(
+                            fontWeight: FontWeight.bold,
                           ),
-                          borderRadius: BorderRadius.circular(50),
                         ),
-                        child: Text(
-                          "Edit Profile",
-                          style: theme.textTheme.labelMedium,
+                        Text(
+                          AppConstants.feedbackEmail,
+                          style: TextStyle(color: Colors.grey[600]),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                        const SizedBox(height: 8),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 5,
+                          ),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: theme.colorScheme.primary,
+                            ),
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          child: Text(
+                            "Give Feedback",
+                            style: theme.textTheme.labelMedium,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(height: 20),
               ListTile(
