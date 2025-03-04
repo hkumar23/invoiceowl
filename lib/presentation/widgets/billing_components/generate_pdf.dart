@@ -286,7 +286,7 @@ abstract class GeneratePdf {
               ),
 
               headerDecoration: const pw.BoxDecoration(
-                color: PdfColors.teal, // Header background color
+                color: PdfColors.blueGrey, // Header background color
               ),
               border: pw.TableBorder.all(
                 width: 1,

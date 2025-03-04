@@ -131,6 +131,7 @@ class SettingsScreen extends StatelessWidget {
               const SizedBox(height: 20),
               ListTile(
                 title: const Text('Business Info'),
+                subtitle: const Text('To add in invoice'),
                 trailing: const Icon(
                   Icons.arrow_forward_ios,
                   size: 20,
