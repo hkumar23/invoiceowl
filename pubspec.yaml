@@ -66,7 +66,11 @@ dev_dependencies:
 
 flutter_launcher_icons:
   android: true
-  image_path: "assets/logo/invoiceowl_app_icon.png"
+  ios: true
+  image_path: "assets/logo/invoiceowl_logo_abstract.png"
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "assets/logo/invoiceowl_app_icon.png"
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
