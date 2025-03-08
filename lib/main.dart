@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:invoiceowl/constants/app_constants.dart';
 
@@ -12,6 +13,7 @@ import 'presentation/screens/settings/bloc/settings_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
   await Hive.initFlutter();
 
   Hive.registerAdapter(InvoiceAdapter());

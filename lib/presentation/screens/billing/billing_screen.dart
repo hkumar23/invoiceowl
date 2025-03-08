@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:invoiceowl/utils/banner_ad_widget.dart';
 
 import '../../../data/models/invoice.model.dart';
 import '../../../data/repositories/invoice_repo.dart';
@@ -14,8 +15,11 @@ class BillingScreen extends StatelessWidget {
     return Stack(
       children: [
         if (invoices.isEmpty)
-          const Center(
-            child: Text("No invoice generated till now"),
+          const Padding(
+            padding: EdgeInsets.only(top: 70),
+            child: Center(
+              child: Text("No invoice generated till now"),
+            ),
           ),
         if (invoices.isNotEmpty)
           SingleChildScrollView(
@@ -69,6 +73,10 @@ class BillingScreen extends StatelessWidget {
             ),
           ),
         ),
+        const Align(
+          alignment: Alignment.topCenter,
+          child: BannerAdWidget(),
+        )
       ],
     );
   }
@@ -76,6 +84,7 @@ class BillingScreen extends StatelessWidget {
 
 List<Widget> _buildInvoiceList(List<Invoice> invoices) {
   List<Widget> invoiceItems = [];
+  invoiceItems.add(const SizedBox(height: 70));
   for (Invoice invoice in invoices) {
     invoiceItems.add(InvoiceItem(invoice: invoice));
   }

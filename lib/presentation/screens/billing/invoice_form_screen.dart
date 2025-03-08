@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:invoiceowl/utils/banner_ad_widget.dart';
 
 import '../main_screen.dart';
 import '../../../utils/custom_snackbar.dart';
@@ -127,6 +128,7 @@ class _InvoiceFormScreenState extends State<InvoiceFormScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // Client Details
+                        const SizedBox(height: 70),
                         Text(
                           'Client Details',
                           style: theme.textTheme.titleLarge
@@ -365,6 +367,10 @@ class _InvoiceFormScreenState extends State<InvoiceFormScreen> {
                     },
                   ),
                 ),
+                const Align(
+                  alignment: Alignment.topCenter,
+                  child: BannerAdWidget(),
+                )
               ],
             );
           },

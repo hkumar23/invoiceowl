@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:invoiceowl/constants/app_constants.dart';
 import 'package:invoiceowl/presentation/screens/settings/bloc/settings_event.dart';
 import 'package:invoiceowl/presentation/widgets/settings_components/generate_qr_bottomsheet.dart';
+import 'package:invoiceowl/utils/banner_ad_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../widgets/settings_components/support_dev_button.dart';
@@ -176,6 +177,11 @@ class SettingsScreen extends StatelessWidget {
                 },
               ),
               const SupportDevButton(),
+              const Spacer(),
+              const Align(
+                alignment: Alignment.topCenter,
+                child: BannerAdWidget(),
+              )
             ],
           ),
           // ),

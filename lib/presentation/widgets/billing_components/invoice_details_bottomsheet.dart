@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:invoiceowl/utils/banner_ad_widget.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../screens/billing/bloc/billing_event.dart';
@@ -43,7 +44,7 @@ abstract class InvoiceBottomsheet {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(height: 34),
+                        const SizedBox(height: 74),
                         // Invoice Details
                         Text(
                           'Invoice Details',
@@ -329,7 +330,7 @@ abstract class InvoiceBottomsheet {
                   ),
                   // Close Button
                   Align(
-                    alignment: Alignment.topRight,
+                    alignment: const Alignment(1, -0.8),
                     child: IconButton(
                       icon: Icon(MdiIcons.closeCircle),
                       onPressed: () {
@@ -373,6 +374,10 @@ abstract class InvoiceBottomsheet {
                       ),
                     ),
                   ),
+                  const Align(
+                    alignment: Alignment.topCenter,
+                    child: BannerAdWidget(),
+                  )
                 ],
               ),
             );
