@@ -1,9 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
-import 'package:hive/hive.dart';
 
 import '../../../widgets/billing_components/generate_pdf.dart';
-import '../../../../constants/app_constants.dart';
 import '../../../../data/models/bill_item.model.dart';
 import '../../../../data/models/invoice.model.dart';
 import '../../../../data/repositories/invoice_repo.dart';
@@ -20,8 +18,12 @@ class BillingBloc extends Bloc<BillingEvent, BillingState> {
       GeneratePdfEvent event, Emitter<BillingState> emit) async {
     emit(BillingLoadingState());
     try {
-      String path = await GeneratePdf.start(event.invoice);
-      emit(PdfGeneratedState(path));
+      bool isSaved = await GeneratePdf.start(event.invoice);
+      if (isSaved) {
+        emit(PdfGeneratedState("Pdf Generated and saved/printed"));
+      } else {
+        emit(PdfNotGeneratedState());
+      }
     } catch (err) {
       debugPrint("Billing Bloc Exception: $err");
       emit(BillingErrorState(errorMessage: "Something went wrong!!"));
@@ -55,8 +57,12 @@ class BillingBloc extends Bloc<BillingEvent, BillingState> {
         double.parse(grandTotal.toStringAsFixed(2)); //Updating Invoice Object
     try {
       await invoiceRepo.addInvoice(invoice);
-      String path = await GeneratePdf.start(invoice);
-      emit(InvoiceGeneratedState(path));
+      bool isSaved = await GeneratePdf.start(invoice);
+      if (isSaved) {
+        emit(InvoiceGeneratedState("Invoice Generated and saved/printed"));
+      } else {
+        emit(InvoiceGeneratedState("Invoice Generated"));
+      }
     } catch (err) {
       debugPrint("Billing Bloc Exception: $err");
       emit(BillingErrorState(errorMessage: "Something went wrong!!"));

@@ -18,6 +18,7 @@ class _BannerAdWidgetState extends State<BannerAdWidget> {
     _bannerAd = BannerAd(
       size: AdSize.fullBanner,
       adUnitId: 'ca-app-pub-3940256099942544/6300978111', // Test ID
+      // adUnitId: 'ca-app-pub-8229541881383920/2216821991',
       listener: BannerAdListener(
         onAdLoaded: (_) {
           setState(() {

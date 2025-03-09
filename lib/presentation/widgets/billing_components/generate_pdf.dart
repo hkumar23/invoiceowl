@@ -17,7 +17,7 @@ import '../../../data/models/business.model.dart';
 import '../../../data/models/invoice.model.dart';
 
 abstract class GeneratePdf {
-  static Future<String> start(Invoice invoice) async {
+  static Future<bool> start(Invoice invoice) async {
     try {
       final doc = pw.Document();
       await _createPage(doc, invoice);
@@ -31,10 +31,11 @@ abstract class GeneratePdf {
       bool isPdfSaved = await _previewPdf(doc);
 
       if (!isPdfSaved) {
-        String path = await _savePdfToLocal(pdfBytes, invoice);
-        return "Pdf saved to: $path";
+        // String path = await _savePdfToLocal(pdfBytes, invoice);
+        // return "Pdf saved to: $path";
+        return false;
       }
-      return "Pdf Generated and saved!";
+      return true;
     } catch (err) {
       rethrow;
     }

@@ -23,7 +23,7 @@ abstract class InvoiceBottomsheet {
             if (state is PdfGeneratedState) {
               CustomSnackbar.success(
                 context: context,
-                text: state.path,
+                text: state.message,
               );
               Navigator.of(context).pop();
             }

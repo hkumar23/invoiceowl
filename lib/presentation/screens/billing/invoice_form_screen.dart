@@ -98,7 +98,7 @@ class _InvoiceFormScreenState extends State<InvoiceFormScreen> {
             if (state is InvoiceGeneratedState) {
               CustomSnackbar.success(
                 context: context,
-                text: state.path,
+                text: state.message,
               );
               Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(
