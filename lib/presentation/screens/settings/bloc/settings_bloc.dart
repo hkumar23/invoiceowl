@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:invoiceowl/constants/app_constants.dart';
 import 'package:invoiceowl/data/repositories/business_repo.dart';
+import 'package:invoiceowl/utils/app_methods.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'settings_event.dart';
@@ -22,12 +23,16 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           'subject=Feedback&body=I love this app!',
         ), // Pre-filled subject & body
       );
-
-      if (await canLaunchUrl(emailUri)) {
-        await launchUrl(emailUri);
+      bool isAbove10 = await AppMethods.isAndroid10OrAbove();
+      if (isAbove10) {
         emit(EmailAppOpenedAndClosedState());
       } else {
-        throw 'Could not launch email app';
+        if (await canLaunchUrl(emailUri)) {
+          await launchUrl(emailUri);
+          emit(EmailAppOpenedAndClosedState());
+        } else {
+          throw 'Could not launch email app';
+        }
       }
     } catch (err) {
       debugPrint(err.toString());

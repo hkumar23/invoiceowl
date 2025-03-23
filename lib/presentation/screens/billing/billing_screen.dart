@@ -73,10 +73,10 @@ class BillingScreen extends StatelessWidget {
             ),
           ),
         ),
-        const Align(
-          alignment: Alignment.topCenter,
-          child: BannerAdWidget(),
-        )
+        // const Align(
+        //   alignment: Alignment.topCenter,
+        //   child: BannerAdWidget(),
+        // )
       ],
     );
   }
@@ -84,7 +84,7 @@ class BillingScreen extends StatelessWidget {
 
 List<Widget> _buildInvoiceList(List<Invoice> invoices) {
   List<Widget> invoiceItems = [];
-  invoiceItems.add(const SizedBox(height: 70));
+  // invoiceItems.add(const SizedBox(height: 70));
   for (Invoice invoice in invoices) {
     invoiceItems.add(InvoiceItem(invoice: invoice));
   }

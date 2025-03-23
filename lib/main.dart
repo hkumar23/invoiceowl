@@ -13,7 +13,7 @@ import 'presentation/screens/settings/bloc/settings_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  MobileAds.instance.initialize();
+  // MobileAds.instance.initialize();
   await Hive.initFlutter();
 
   Hive.registerAdapter(InvoiceAdapter());

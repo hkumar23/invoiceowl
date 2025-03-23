@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:invoiceowl/data/repositories/business_repo.dart';
@@ -97,8 +98,8 @@ abstract class GeneratePdf {
   static Future<void> _createPage(doc, Invoice invoice) async {
     final font = await _loadFont();
     final defaultTextStyle = pw.TextStyle(font: font);
-    final logoImageData =
-        await _loadAssetImage("assets/logo/invoiceowl_logo.png");
+    // final logoImageData =
+    //     await _loadAssetImage("assets/logo/invoiceowl_logo.png");
     final googlePlayImageData =
         await _loadAssetImage("assets/images/get_it_on_google_play.png");
     final Business? business = BusinessRepo().getBusinessInfo();
@@ -224,36 +225,36 @@ abstract class GeneratePdf {
                   pw.Column(
                     crossAxisAlignment: pw.CrossAxisAlignment.start,
                     children: [
-                      pw.Row(
-                        mainAxisAlignment: pw.MainAxisAlignment.end,
-                        children: [
-                          pw.SizedBox(width: 100),
-                          pw.Column(
-                            children: [
-                              pw.Image(
-                                pw.MemoryImage(logoImageData),
-                                width: 70,
-                                height: 70,
-                              ),
-                              pw.SizedBox(height: 7),
-                              // pw.Text(
-                              //   AppLanguage.appName,
-                              //   style: defaultTextStyle.copyWith(
-                              //     fontSize: 15,
-                              //     fontWeight: pw.FontWeight.bold,
-                              //   ),
-                              // ),
-                              pw.Image(
-                                pw.MemoryImage(googlePlayImageData),
-                                // width: 100,
-                                height: 22,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                      // pw.Row(
+                      //   mainAxisAlignment: pw.MainAxisAlignment.end,
+                      //   children: [
+                      //     pw.SizedBox(width: 100),
+                      //     pw.Column(
+                      //       children: [
+                      //         pw.Image(
+                      //           pw.MemoryImage(logoImageData),
+                      //           width: 70,
+                      //           height: 70,
+                      //         ),
+                      //         pw.SizedBox(height: 7),
+                      //         pw.Text(
+                      //           AppLanguage.appName,
+                      //           style: defaultTextStyle.copyWith(
+                      //             fontSize: 15,
+                      //             fontWeight: pw.FontWeight.bold,
+                      //           ),
+                      //         ),
+                      //         pw.Image(
+                      //           pw.MemoryImage(googlePlayImageData),
+                      //           // width: 100,
+                      //           height: 22,
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ],
+                      // ),
 
-                      pw.SizedBox(height: 20),
+                      pw.SizedBox(height: 46),
                       // Invoice Details
                       pw.Text(
                         'Invoice ID: ${AppConstants.invoiceIdPrefix}${invoice.invoiceNumber}',
@@ -354,6 +355,22 @@ abstract class GeneratePdf {
                 invoice.notes!,
                 style: defaultTextStyle,
               ),
+            pw.Spacer(),
+            pw.Align(
+              alignment: pw.Alignment.bottomCenter,
+              child: pw.Text(
+                "Generated with Invoice Owl - Free Invoice maker",
+                style: defaultTextStyle.copyWith(color: PdfColors.blueGrey),
+              ),
+            ),
+            pw.Align(
+              alignment: pw.Alignment.bottomCenter,
+              child: pw.Text(
+                "Get the app on Play Store!",
+                style: defaultTextStyle.copyWith(color: PdfColors.blueGrey),
+              ),
+            ),
+
             // if (invoice.notes != null) pw.SizedBox(height: 10),
           ],
         ),

@@ -177,11 +177,11 @@ class SettingsScreen extends StatelessWidget {
                 },
               ),
               const SupportDevButton(),
-              const Spacer(),
-              const Align(
-                alignment: Alignment.topCenter,
-                child: BannerAdWidget(),
-              )
+              // const Spacer(),
+              // const Align(
+              //   alignment: Alignment.topCenter,
+              //   child: BannerAdWidget(),
+              // )
             ],
           ),
           // ),

@@ -128,7 +128,7 @@ class _InvoiceFormScreenState extends State<InvoiceFormScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // Client Details
-                        const SizedBox(height: 70),
+                        // const SizedBox(height: 70),
                         Text(
                           'Client Details',
                           style: theme.textTheme.titleLarge
@@ -367,10 +367,10 @@ class _InvoiceFormScreenState extends State<InvoiceFormScreen> {
                     },
                   ),
                 ),
-                const Align(
-                  alignment: Alignment.topCenter,
-                  child: BannerAdWidget(),
-                )
+                // const Align(
+                //   alignment: Alignment.topCenter,
+                //   child: BannerAdWidget(),
+                // )
               ],
             );
           },
