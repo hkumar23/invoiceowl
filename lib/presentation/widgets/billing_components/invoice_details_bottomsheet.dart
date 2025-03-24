@@ -44,8 +44,8 @@ abstract class InvoiceBottomsheet {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // const SizedBox(height: 74),
-                        const SizedBox(height: 10),
+                        const SizedBox(height: 74),
+                        // const SizedBox(height: 10),
                         // Invoice Details
                         Text(
                           'Invoice Details',
@@ -376,10 +376,10 @@ abstract class InvoiceBottomsheet {
                       ),
                     ),
                   ),
-                  // const Align(
-                  //   alignment: Alignment.topCenter,
-                  //   child: BannerAdWidget(),
-                  // )
+                  const Align(
+                    alignment: Alignment.topCenter,
+                    child: BannerAdWidget(),
+                  )
                 ],
               ),
             );

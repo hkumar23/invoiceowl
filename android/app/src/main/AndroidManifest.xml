@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="29"/>
 <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-<uses-permission android:name="android.permission.CAMERA"/>
-<!-- <uses-permission android:name="com.google.android.gms.permission.AD_ID"/> -->
+<!-- <uses-permission android:name="android.permission.CAMERA"/> -->
+<uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
 <!-- Un comment when showing ads -->
 
 <!-- IMPORTANT: Don't use MANAGE_EXTERNAL_STORAGE google may reject app -->
@@ -11,9 +11,9 @@
         android:label="Invoice Owl"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
-        <!-- <meta-data
+        <meta-data
            android:name="com.google.android.gms.ads.APPLICATION_ID"
-           android:value="ca-app-pub-7181037697962753~6507753935"/> -->
+           android:value="ca-app-pub-7181037697962753~6507753935"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
