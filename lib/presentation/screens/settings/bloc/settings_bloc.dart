@@ -13,7 +13,23 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     on<SaveBusinessInfoEvent>(_onSaveBusinessInfoEvent);
     on<SaveUpiIdEvent>(_onSaveUpiIdEvent);
     on<SendFeedbackEvent>(_onSendFeedbackEvent);
+    on<UpdateCurrencyEvent>(_onUpdateCurrencyEvent);
   }
+  void _onUpdateCurrencyEvent(event, emit) async {
+    try {
+      emit(SettingsLoadingState());
+      await BusinessRepo().updateCurrency(event.currency);
+      emit(CurrencyUpdatedState());
+    } catch (err) {
+      debugPrint(err.toString());
+      emit(
+        SettingsErrorState(
+          errorMessage: "Some error occured!, Currency not updated",
+        ),
+      );
+    }
+  }
+
   void _onSendFeedbackEvent(event, emit) async {
     try {
       final Uri emailUri = Uri(

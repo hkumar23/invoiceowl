@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:invoiceowl/data/repositories/business_repo.dart';
 import 'package:invoiceowl/utils/banner_ad_widget.dart';
 
 import '../main_screen.dart';
@@ -81,6 +82,8 @@ class _InvoiceFormScreenState extends State<InvoiceFormScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final currency = BusinessRepo().getCurrency();
+    final currSymbol = currency == null ? "₹ " : "${currency["symbol"]} ";
 
     return PopScope(
       canPop: false,
@@ -234,11 +237,8 @@ class _InvoiceFormScreenState extends State<InvoiceFormScreen> {
                               child: TextFormField(
                                 controller: _extraDiscountController,
                                 keyboardType: TextInputType.number,
-                                decoration: const InputDecoration(
-                                  prefix: Icon(
-                                    Icons.currency_rupee,
-                                    size: 15,
-                                  ),
+                                decoration: InputDecoration(
+                                  prefix: Text(currSymbol),
                                   labelText: AppLanguage.extraDiscount,
                                 ),
                                 validator: (value) {
@@ -275,13 +275,9 @@ class _InvoiceFormScreenState extends State<InvoiceFormScreen> {
                         ),
                         TextFormField(
                           controller: _shippingChargesController,
-                          decoration: const InputDecoration(
-                            labelText: 'Shipping Charges',
-                            prefix: Icon(
-                              Icons.currency_rupee,
-                              size: 15,
-                            ),
-                          ),
+                          decoration: InputDecoration(
+                              labelText: 'Shipping Charges',
+                              prefix: Text(currSymbol)),
                           keyboardType: TextInputType.number,
                           validator: (value) {
                             if (value == null || value.isEmpty) return null;

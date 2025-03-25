@@ -1,14 +1,23 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 // import '../constants/app_constants.dart';
 import '../constants/app_language.dart';
 
 class AppMethods {
+  static Future<List<Map<String, dynamic>>> loadCurrencies() async {
+    String jsonString = await rootBundle.loadString('assets/currencies.json');
+    List<dynamic> jsonResponse = json.decode(jsonString);
+
+    return jsonResponse.cast<Map<String, dynamic>>();
+  }
+
   static Future<bool> requestStoragePermission() async {
     if (Platform.isAndroid) {
       var status = await Permission.storage.request();

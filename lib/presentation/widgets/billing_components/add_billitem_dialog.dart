@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:invoiceowl/data/models/business.model.dart';
+import 'package:invoiceowl/data/repositories/business_repo.dart';
 
 import '../../../../constants/app_constants.dart';
 import '../../../constants/app_language.dart';
@@ -58,6 +60,8 @@ class AddBillitemDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final currency = BusinessRepo().getCurrency();
+    final currSymbol = currency == null ? "₹ " : "${currency["symbol"]} ";
     return AlertDialog(
       backgroundColor: theme.colorScheme.secondaryContainer,
       title: const Text(AppLanguage.addItem),
@@ -101,12 +105,13 @@ class AddBillitemDialog extends StatelessWidget {
                   Expanded(
                     child: TextFormField(
                       controller: _unitPriceController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         labelText: "${AppLanguage.unitPrice}*",
-                        prefix: Icon(
-                          Icons.currency_rupee,
-                          size: 15,
-                        ),
+                        // prefix: Icon(
+                        //   Icons.currency_rupee,
+                        //   size: 15,
+                        // ),
+                        prefix: Text(currSymbol),
                       ),
                       keyboardType: TextInputType.number,
                       validator: (value) {

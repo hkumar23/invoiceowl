@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:invoiceowl/data/repositories/business_repo.dart';
 import 'package:invoiceowl/utils/banner_ad_widget.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -15,6 +16,8 @@ abstract class InvoiceBottomsheet {
   static BottomSheet bottomSheet(BuildContext context, Invoice invoice) {
     // print(invoice.toJson());
     final theme = Theme.of(context);
+    final currency = BusinessRepo().getCurrency();
+    final currSymbol = currency == null ? '₹ ' : "${currency["symbol"]} ";
     return BottomSheet(
       onClosing: () {}, // Required callback, but we handle closing manually
       builder: (BuildContext context) {
@@ -233,7 +236,8 @@ abstract class InvoiceBottomsheet {
                                         horizontal: 10),
                                     alignment: Alignment.center,
                                     child: Text(
-                                      '₹${item.value.unitPrice}',
+                                      currSymbol +
+                                          item.value.unitPrice.toString(),
                                       style: theme.textTheme.bodySmall,
                                     ),
                                   ),
@@ -265,7 +269,9 @@ abstract class InvoiceBottomsheet {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 10),
                                     alignment: Alignment.center,
-                                    child: Text('₹${item.value.totalPrice}',
+                                    child: Text(
+                                        currSymbol +
+                                            item.value.totalPrice.toString(),
                                         style: theme.textTheme.bodySmall),
                                   ),
                                 ),
@@ -283,29 +289,29 @@ abstract class InvoiceBottomsheet {
                         ),
                         const SizedBox(height: 10),
                         Text(
-                          'Subtotal: ₹${invoice.subtotal}',
+                          'Subtotal: ${currSymbol + invoice.subtotal.toString()}',
                           style: theme.textTheme.bodyLarge,
                         ),
                         if (invoice.extraDiscount != null)
                           Text(
-                            'Extra Discount: ₹${invoice.extraDiscount}',
+                            'Extra Discount: ${currSymbol + invoice.extraDiscount.toString()}',
                             style: theme.textTheme.bodyLarge,
                           ),
                         Text(
-                          'Total Discount: ₹${invoice.totalDiscount}',
+                          'Total Discount: ${currSymbol + invoice.totalDiscount.toString()}',
                           style: theme.textTheme.bodyLarge,
                         ),
                         Text(
-                          'Total Tax: ₹${invoice.totalTaxAmount}',
+                          'Total Tax: ${currSymbol + invoice.totalTaxAmount.toString()}',
                           style: theme.textTheme.bodyLarge,
                         ),
                         if (invoice.shippingCharges != null)
                           Text(
-                            'Shipping Charges: ₹${invoice.shippingCharges}',
+                            'Shipping Charges: ${currSymbol + invoice.shippingCharges.toString()}',
                             style: theme.textTheme.bodyLarge,
                           ),
                         Text(
-                          'Grand Total: ₹${invoice.grandTotal}',
+                          'Grand Total: ${currSymbol + invoice.grandTotal.toString()}',
                           style: theme.textTheme.bodyLarge!.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
@@ -331,8 +337,8 @@ abstract class InvoiceBottomsheet {
                   ),
                   // Close Button
                   Align(
-                    alignment: const Alignment(1, -1),
-                    // alignment: const Alignment(1, -0.8),
+                    // alignment: const Alignment(1, -1),// Normal
+                    alignment: const Alignment(1, -0.8), // With ads
                     child: IconButton(
                       icon: Icon(MdiIcons.closeCircle),
                       onPressed: () {

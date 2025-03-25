@@ -25,6 +25,8 @@ class Business {
   String? upiId;
   @HiveField(6)
   int globalInvoiceNumber;
+  @HiveField(7)
+  Map<String, dynamic>? currency;
 
   Business({
     // this.name = "Shop Owner",
@@ -39,6 +41,7 @@ class Business {
     this.gstin,
     this.upiId,
     this.globalInvoiceNumber = 0,
+    this.currency,
   });
 
   Map<String, dynamic> toJson() {
@@ -50,6 +53,7 @@ class Business {
       AppConstants.gstin: gstin,
       AppConstants.upiId: upiId,
       AppConstants.globalInvoiceNumber: globalInvoiceNumber,
+      AppConstants.currency: currency,
     };
   }
 
@@ -62,6 +66,7 @@ class Business {
       gstin: json[AppConstants.gstin],
       upiId: json[AppConstants.upiId],
       globalInvoiceNumber: json[AppConstants.globalInvoiceNumber],
+      currency: json[AppConstants.currency],
     );
   }
 }

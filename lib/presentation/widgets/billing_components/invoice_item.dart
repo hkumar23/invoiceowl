@@ -1,29 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:invoiceowl/data/repositories/business_repo.dart';
 
 import '../../../constants/app_constants.dart';
 import '../../../data/models/invoice.model.dart';
 import 'invoice_details_bottomsheet.dart';
 
-class InvoiceItem extends StatelessWidget {
+class InvoiceItem extends StatefulWidget {
   const InvoiceItem({
     super.key,
     required this.invoice,
   });
   final Invoice invoice;
+
+  @override
+  State<InvoiceItem> createState() => _InvoiceItemState();
+}
+
+class _InvoiceItemState extends State<InvoiceItem> {
   void showInvoice(BuildContext context) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true, // Ensures the bottom sheet can expand fully
       enableDrag: true,
       builder: (BuildContext context) {
-        return InvoiceBottomsheet.bottomSheet(context, invoice);
+        return InvoiceBottomsheet.bottomSheet(context, widget.invoice);
       },
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    final currency = BusinessRepo().getCurrency();
+    final currSymbol = currency == null ? '₹ ' : "${currency["symbol"]} ";
+
     return GestureDetector(
       onTap: () => showInvoice(context),
       child: Container(
@@ -48,7 +58,7 @@ class InvoiceItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      invoice.clientName,
+                      widget.invoice.clientName,
                       style: Theme.of(context)
                           .textTheme
                           .headlineSmall!
@@ -82,7 +92,7 @@ class InvoiceItem extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      "${AppConstants.invoiceIdPrefix}${invoice.invoiceNumber}",
+                      "${AppConstants.invoiceIdPrefix}${widget.invoice.invoiceNumber}",
                       style: Theme.of(context).textTheme.titleMedium!.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
@@ -94,7 +104,7 @@ class InvoiceItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Total: ₹${invoice.grandTotal}',
+                      'Total: ${currSymbol + widget.invoice.grandTotal.toString()}',
                       style: Theme.of(context).textTheme.titleMedium!.copyWith(
                             color: Colors.green,
                             fontWeight: FontWeight.bold,
@@ -103,7 +113,8 @@ class InvoiceItem extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(right: 4),
                       child: Text(
-                        DateFormat('dd-MM-yyyy').format(invoice.invoiceDate!),
+                        DateFormat('dd-MM-yyyy')
+                            .format(widget.invoice.invoiceDate!),
                         style: Theme.of(context).textTheme.labelLarge!.copyWith(
                               color: Theme.of(context)
                                   .colorScheme

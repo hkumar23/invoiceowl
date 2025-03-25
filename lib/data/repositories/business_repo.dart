@@ -36,10 +36,30 @@ class BusinessRepo {
     }
   }
 
+  Future<void> updateCurrency(Map<String, dynamic> currency) async {
+    try {
+      Business? business = getBusinessInfo();
+      if (business == null) {
+        await _businessBox.put(0, Business(currency: currency));
+      } else {
+        business.currency = currency;
+        await _businessBox.put(0, business);
+      }
+    } catch (err) {
+      rethrow;
+    }
+  }
+
   String? getUpiId() {
     final Business? business = getBusinessInfo();
     if (business == null) return null;
     return business.upiId;
+  }
+
+  Map<String, dynamic>? getCurrency() {
+    final Business? business = getBusinessInfo();
+    if (business == null) return null;
+    return business.currency;
   }
 
   Future<int> getNextInvoiceNumber() async {

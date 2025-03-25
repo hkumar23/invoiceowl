@@ -27,6 +27,11 @@ class UpdateNameAndImageEvent extends SettingsEvent {
 }
 
 class SendFeedbackEvent extends SettingsEvent {}
+
+class UpdateCurrencyEvent extends SettingsEvent {
+  Map<String, dynamic> currency;
+  UpdateCurrencyEvent({required this.currency});
+}
 // class GenerateQrEvent extends SettingsEvent {
 //   final String amount;
 //   GenerateQrEvent({required this.amount});

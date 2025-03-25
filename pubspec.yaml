@@ -89,6 +89,8 @@ flutter:
     - assets/images/get_it_on_google_play.png
     - assets/images/upi_apps_logo/payment-icons.png
     - assets/images/upi_apps_logo/upi.png
+
+    - assets/currencies.json
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 

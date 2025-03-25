@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:invoiceowl/constants/app_constants.dart';
-import 'package:invoiceowl/presentation/screens/settings/bloc/settings_event.dart';
-import 'package:invoiceowl/presentation/widgets/settings_components/generate_qr_bottomsheet.dart';
-import 'package:invoiceowl/utils/banner_ad_widget.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:invoiceowl/data/models/business.model.dart';
+import 'package:invoiceowl/data/repositories/business_repo.dart';
+import 'package:invoiceowl/presentation/widgets/settings_components/currency_search_screen.dart';
 
+import '../../../constants/app_constants.dart';
+import '../../widgets/settings_components/generate_qr_bottomsheet.dart';
+import '../../../utils/banner_ad_widget.dart';
 import '../../widgets/settings_components/support_dev_button.dart';
 import '../../../utils/custom_top_snackbar.dart';
 import 'bloc/settings_bloc.dart';
 import 'bloc/settings_state.dart';
+import 'bloc/settings_event.dart';
 import '../../widgets/settings_components/business_info_bottomsheet.dart';
 import '../../widgets/settings_components/save_upi_bottomsheet.dart';
 import '../../../utils/custom_snackbar.dart';
@@ -21,6 +23,7 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     bool isBottomSheetOpened = false;
+    Business? business = BusinessRepo().getBusinessInfo();
 
     void toggleBottomSheet(bool val) {
       isBottomSheetOpened = val;
@@ -51,6 +54,12 @@ class SettingsScreen extends StatelessWidget {
           CustomSnackbar.success(
             context: context,
             text: "UPI ID saved successfully !!",
+          );
+        }
+        if (state is CurrencyUpdatedState) {
+          CustomSnackbar.success(
+            context: context,
+            text: "Currency Updated",
           );
         }
       },
@@ -175,6 +184,29 @@ class SettingsScreen extends StatelessWidget {
                         return const GenerateQrBottomSheet();
                       });
                 },
+              ),
+              ListTile(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return const CurrencySearchScreen();
+                      },
+                    ),
+                  );
+                },
+                title: const Text('Change Currency'),
+                subtitle: business == null ||
+                        business.currency == null ||
+                        business.currency!["code"] == "INR"
+                    ? const Text("Default: ₹ - INR")
+                    : Text(
+                        "Selected: ${business.currency!["symbol"]} - ${business.currency!["code"]}"),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios,
+                  size: 20,
+                ),
               ),
               const SupportDevButton(),
               const Spacer(),

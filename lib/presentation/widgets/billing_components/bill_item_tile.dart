@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:invoiceowl/data/repositories/business_repo.dart';
 
 import '../../../data/models/bill_item.model.dart';
 
@@ -12,6 +13,9 @@ class BillItemTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final currency = BusinessRepo().getCurrency();
+    final currSymbol = currency == null ? '₹ ' : "${currency["symbol"]} ";
+
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 4),
       margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
@@ -63,7 +67,7 @@ class BillItemTile extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 Text(
-                  '₹${billItem.unitPrice}',
+                  currSymbol + billItem.unitPrice.toString(),
                   style: textTheme.bodySmall,
                   textAlign: TextAlign.center,
                 ),
@@ -119,7 +123,7 @@ class BillItemTile extends StatelessWidget {
                   textAlign: TextAlign.end,
                 ),
                 Text(
-                  '₹ ${billItem.totalPrice}',
+                  currSymbol + billItem.totalPrice.toString(),
                   style: textTheme.bodySmall
                       ?.copyWith(fontWeight: FontWeight.w600),
                   textAlign: TextAlign.end,

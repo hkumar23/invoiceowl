@@ -22,13 +22,16 @@ class BusinessAdapter extends TypeAdapter<Business> {
       email: fields[2] as String?,
       phone: fields[3] as String?,
       gstin: fields[4] as String?,
+      upiId: fields[5] as String?,
+      globalInvoiceNumber: fields[6] as int,
+      currency: (fields[7] as Map?)?.cast<String, dynamic>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, Business obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -38,7 +41,13 @@ class BusinessAdapter extends TypeAdapter<Business> {
       ..writeByte(3)
       ..write(obj.phone)
       ..writeByte(4)
-      ..write(obj.gstin);
+      ..write(obj.gstin)
+      ..writeByte(5)
+      ..write(obj.upiId)
+      ..writeByte(6)
+      ..write(obj.globalInvoiceNumber)
+      ..writeByte(7)
+      ..write(obj.currency);
   }
 
   @override

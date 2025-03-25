@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:invoiceowl/data/repositories/business_repo.dart';
@@ -9,9 +8,7 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
 
-import '../../../constants/app_language.dart';
 import '../../../utils/app_methods.dart';
 import '../../../constants/app_constants.dart';
 import '../../../data/models/business.model.dart';
@@ -23,7 +20,7 @@ abstract class GeneratePdf {
       final doc = pw.Document();
       await _createPage(doc, invoice);
 
-      final pdfBytes = await doc.save();
+      // final pdfBytes = await doc.save();
 
       await AppMethods.requestStoragePermission();
       // if (!isGranted) {
@@ -100,9 +97,11 @@ abstract class GeneratePdf {
     final defaultTextStyle = pw.TextStyle(font: font);
     // final logoImageData =
     //     await _loadAssetImage("assets/logo/invoiceowl_logo.png");
-    final googlePlayImageData =
-        await _loadAssetImage("assets/images/get_it_on_google_play.png");
+    // final googlePlayImageData =
+    //     await _loadAssetImage("assets/images/get_it_on_google_play.png");
     final Business? business = BusinessRepo().getBusinessInfo();
+    final currency = business?.currency;
+    final currSymbol = currency == null ? '₹ ' : "${currency["symbol"]} ";
     // print(business?.toJson());
     final List<List<dynamic>> tableData = [
       // Header Row
@@ -121,10 +120,10 @@ abstract class GeneratePdf {
           item.key + 1,
           item.value.itemName,
           item.value.quantity,
-          '₹${item.value.unitPrice}',
+          (currSymbol + item.value.unitPrice.toString()),
           item.value.tax,
           item.value.discount,
-          '₹${item.value.totalPrice}',
+          (currSymbol + item.value.totalPrice.toString()),
         ];
       }),
     ];
@@ -309,31 +308,31 @@ abstract class GeneratePdf {
                 style: defaultTextStyle.copyWith(
                     fontSize: 20, fontWeight: pw.FontWeight.bold)),
             pw.Text(
-              'Subtotal: ₹${invoice.subtotal}',
+              'Subtotal: ${currSymbol + invoice.subtotal.toString()}',
               style: defaultTextStyle,
             ),
             if (invoice.extraDiscount != null)
               pw.Text(
-                'Extra Discount: ₹${invoice.extraDiscount}',
+                'Extra Discount: ${currSymbol + invoice.extraDiscount.toString()}',
                 style: defaultTextStyle,
               ),
             pw.Text(
-              'Total Discount: ₹${invoice.totalDiscount}',
+              'Total Discount: ${currSymbol + invoice.totalDiscount.toString()}',
               style: defaultTextStyle,
             ),
             pw.Text(
-              'Total Tax: ₹${invoice.totalTaxAmount}',
+              'Total Tax: ${currSymbol + invoice.totalTaxAmount.toString()}',
               style: defaultTextStyle,
             ),
             if (invoice.shippingCharges != null)
               pw.Text(
-                'Shipping Charges: ₹${invoice.shippingCharges}',
+                'Shipping Charges: ${currSymbol + invoice.shippingCharges.toString()}',
                 style: defaultTextStyle,
               ),
 
             pw.Divider(endIndent: 300),
             pw.Text(
-              'Grand Total: ₹${invoice.grandTotal}',
+              'Grand Total: ${currSymbol + invoice.grandTotal.toString()}',
               style: defaultTextStyle.copyWith(
                 fontSize: 15,
                 fontWeight: pw.FontWeight.bold,
