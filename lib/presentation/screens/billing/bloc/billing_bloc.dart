@@ -13,9 +13,31 @@ class BillingBloc extends Bloc<BillingEvent, BillingState> {
     // print("Entered Bloc");
     on<GenerateInvoiceEvent>(_onGenerateInvoiceEvent);
     on<GeneratePdfEvent>(_onGeneratePdfEvent);
+    on<DeleteInvoiceEvent>(_onDeleteInvoiceEvent);
   }
+  void _onDeleteInvoiceEvent(
+    DeleteInvoiceEvent event,
+    Emitter<BillingState> emit,
+  ) async {
+    try {
+      emit(BillingLoadingState());
+      final invoiceRepo = InvoiceRepo();
+      await invoiceRepo.deleteInvoice(event.invoice.docId!);
+      emit(InvoiceDeletedState());
+    } catch (err) {
+      debugPrint(err.toString());
+      emit(
+        BillingErrorState(
+          errorMessage: "Something went wrong, while deleting invoice !",
+        ),
+      );
+    }
+  }
+
   void _onGeneratePdfEvent(
-      GeneratePdfEvent event, Emitter<BillingState> emit) async {
+    GeneratePdfEvent event,
+    Emitter<BillingState> emit,
+  ) async {
     emit(BillingLoadingState());
     try {
       bool isSaved = await GeneratePdf.start(event.invoice);

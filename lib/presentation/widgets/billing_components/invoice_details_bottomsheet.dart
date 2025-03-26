@@ -30,6 +30,13 @@ abstract class InvoiceBottomsheet {
               );
               Navigator.of(context).pop();
             }
+            if (state is InvoiceDeletedState) {
+              CustomSnackbar.success(
+                context: context,
+                text: "Invoice Deleted",
+              );
+              Navigator.of(context).pop();
+            }
           },
           builder: (context, state) {
             if (state is BillingLoadingState) {
@@ -331,7 +338,7 @@ abstract class InvoiceBottomsheet {
                             invoice.notes!,
                             style: theme.textTheme.bodyLarge,
                           ),
-                        const SizedBox(height: 40)
+                        const SizedBox(height: 50)
                       ],
                     ),
                   ),
@@ -372,6 +379,39 @@ abstract class InvoiceBottomsheet {
                             ),
                             Text(
                               "Generate Pdf",
+                              style: theme.textTheme.labelLarge!.copyWith(
+                                color: theme.colorScheme.onPrimaryContainer,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomLeft,
+                    child: GestureDetector(
+                      onTap: () {
+                        context
+                            .read<BillingBloc>()
+                            .add(DeleteInvoiceEvent(invoice: invoice));
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(50)),
+                          color: Colors.red,
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Icon(
+                              Icons.delete,
+                              color: Colors.white,
+                            ),
+                            Text(
+                              "Delete Invoice",
                               style: theme.textTheme.labelLarge!.copyWith(
                                 color: theme.colorScheme.onPrimaryContainer,
                                 fontWeight: FontWeight.bold,

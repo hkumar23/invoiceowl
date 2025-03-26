@@ -31,3 +31,5 @@ class PdfNotGeneratedState extends BillingState {}
 class InvoiceUpdatedState extends BillingState {}
 
 class LocalInvoicesFetchedState extends BillingState {}
+
+class InvoiceDeletedState extends BillingState {}

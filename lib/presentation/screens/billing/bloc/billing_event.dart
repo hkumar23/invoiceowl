@@ -13,6 +13,11 @@ class GeneratePdfEvent extends BillingEvent {
   GeneratePdfEvent({required this.invoice});
 }
 
+class DeleteInvoiceEvent extends BillingEvent {
+  Invoice invoice;
+  DeleteInvoiceEvent({required this.invoice});
+}
+
 class UpdateInvoiceEvent extends BillingEvent {}
 
 class AddBillItemEvent extends BillingEvent {
