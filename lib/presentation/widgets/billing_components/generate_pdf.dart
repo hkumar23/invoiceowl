@@ -188,7 +188,7 @@ abstract class GeneratePdf {
                             business.gstin != null &&
                             business.gstin!.isNotEmpty)
                           pw.Text(
-                            'GSTIN: ${business.gstin}',
+                            'GSTIN / TIN : ${business.gstin}',
                             style: defaultTextStyle,
                           ),
                         pw.SizedBox(height: 10),

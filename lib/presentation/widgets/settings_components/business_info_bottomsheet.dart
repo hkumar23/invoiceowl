@@ -61,6 +61,7 @@ class _BusinessInfoBottomSheetState extends State<BusinessInfoBottomSheet> {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
+    final currency = _business?.currency;
 
     return Padding(
       padding: EdgeInsets.only(
@@ -127,14 +128,14 @@ class _BusinessInfoBottomSheetState extends State<BusinessInfoBottomSheet> {
                 TextFormField(
                   controller: _phoneController,
                   decoration: const InputDecoration(
-                    prefix: Text("+91"),
+                    // prefix: Text("+91"),
                     label: Text("Phone Number"),
                   ),
                   keyboardType: TextInputType.phone,
-                  maxLength: 10,
+                  maxLength: 15,
                   validator: (value) {
                     if (value == null || value.isEmpty) return null;
-                    if (value.length < 10 || double.tryParse(value) == null) {
+                    if (double.tryParse(value) == null) {
                       return 'Please enter a valid phone number';
                     }
                     return null;
@@ -143,13 +144,14 @@ class _BusinessInfoBottomSheetState extends State<BusinessInfoBottomSheet> {
                 TextFormField(
                   controller: _gstinController,
                   decoration: const InputDecoration(
-                    label: Text("GST Number"),
+                    label: Text("GSTIN / TIN"),
                   ),
                   keyboardType: TextInputType.text,
-                  maxLength: 15,
+                  maxLength: 25,
                   validator: (value) {
                     if (value == null || value.isEmpty) return null;
-                    if (!validateGSTNumber(value)) {
+                    if ((currency == null || currency["code"] == "INR") &&
+                        !validateGSTNumber(value)) {
                       return "Invalid GST Number..!";
                     }
                     return null;

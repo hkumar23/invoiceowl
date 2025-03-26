@@ -170,15 +170,15 @@ class _InvoiceFormScreenState extends State<InvoiceFormScreen> {
                           controller: _phoneController,
                           decoration: const InputDecoration(
                             labelText: AppLanguage.phoneNumber,
-                            prefix: Text("+91"),
+                            // prefix: Text("+91"),
                           ),
-                          maxLength: 10,
+                          maxLength: 15,
                           keyboardType: TextInputType.phone,
                           validator: (value) {
                             if (value == null || value.isEmpty) return null;
-                            if (value.length != 10) {
-                              return 'Phone number must be 10 digits';
-                            }
+                            // if (value.length != 10) {
+                            //   return 'Phone number must be 10 digits';
+                            // }
                             if (!AppMethods.isNumeric(value)) {
                               return "Enter a valid Phone Number";
                             }

@@ -139,76 +139,82 @@ class SettingsScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              ListTile(
-                title: const Text('Business Info'),
-                subtitle: const Text('To add in invoice'),
-                trailing: const Icon(
-                  Icons.arrow_forward_ios,
-                  size: 20,
-                ),
-                onTap: () {
-                  showModalBottomSheet(
-                      isScrollControlled: true,
-                      context: context,
-                      builder: (context) {
-                        return const BusinessInfoBottomSheet();
-                        // return Container();
-                      });
-                },
-              ),
-              ListTile(
-                onTap: () {
-                  showModalBottomSheet(
-                      context: context,
-                      builder: (context) {
-                        return const SaveUpiBottomsheet();
-                      });
-                },
-                title: const Text('UPI ID'),
-                subtitle: const Text('For QR Code generation'),
-                trailing: const Icon(
-                  Icons.arrow_forward_ios,
-                  size: 20,
-                ),
-              ),
-              ListTile(
-                title: const Text('Generate QR Code'),
-                trailing: const Icon(
-                  Icons.arrow_forward_ios,
-                  size: 20,
-                ),
-                onTap: () {
-                  showModalBottomSheet(
-                      context: context,
-                      builder: (context) {
-                        return const GenerateQrBottomSheet();
-                      });
-                },
-              ),
-              ListTile(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return const CurrencySearchScreen();
+              SingleChildScrollView(
+                child: Column(
+                  children: [
+                    ListTile(
+                      title: const Text('Business Info'),
+                      subtitle: const Text('To add in invoice'),
+                      trailing: const Icon(
+                        Icons.arrow_forward_ios,
+                        size: 20,
+                      ),
+                      onTap: () {
+                        showModalBottomSheet(
+                            isScrollControlled: true,
+                            context: context,
+                            builder: (context) {
+                              return const BusinessInfoBottomSheet();
+                              // return Container();
+                            });
                       },
                     ),
-                  );
-                },
-                title: const Text('Change Currency'),
-                subtitle: business == null ||
-                        business.currency == null ||
-                        business.currency!["code"] == "INR"
-                    ? const Text("Default: ₹ - INR")
-                    : Text(
-                        "Selected: ${business.currency!["symbol"]} - ${business.currency!["code"]}"),
-                trailing: const Icon(
-                  Icons.arrow_forward_ios,
-                  size: 20,
+                    ListTile(
+                      onTap: () {
+                        showModalBottomSheet(
+                            context: context,
+                            builder: (context) {
+                              return const SaveUpiBottomsheet();
+                            });
+                      },
+                      title: const Text('UPI ID'),
+                      subtitle: const Text('For QR Code generation'),
+                      trailing: const Icon(
+                        Icons.arrow_forward_ios,
+                        size: 20,
+                      ),
+                    ),
+                    ListTile(
+                      title: const Text('Generate QR Code'),
+                      trailing: const Icon(
+                        Icons.arrow_forward_ios,
+                        size: 20,
+                      ),
+                      onTap: () {
+                        showModalBottomSheet(
+                            context: context,
+                            builder: (context) {
+                              return const GenerateQrBottomSheet();
+                            });
+                      },
+                    ),
+                    ListTile(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return const CurrencySearchScreen();
+                            },
+                          ),
+                        );
+                      },
+                      title: const Text('Change Currency'),
+                      subtitle: business == null ||
+                              business.currency == null ||
+                              business.currency!["code"] == "INR"
+                          ? const Text("Default: ₹ - INR")
+                          : Text(
+                              "Selected: ${business.currency!["symbol"]} - ${business.currency!["code"]}"),
+                      trailing: const Icon(
+                        Icons.arrow_forward_ios,
+                        size: 20,
+                      ),
+                    ),
+                    const SupportDevButton(),
+                  ],
                 ),
               ),
-              const SupportDevButton(),
               const Spacer(),
               const Align(
                 alignment: Alignment.topCenter,

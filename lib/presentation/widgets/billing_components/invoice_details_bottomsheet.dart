@@ -96,7 +96,7 @@ abstract class InvoiceBottomsheet {
                           ),
                         if (invoice.clientPhone != null)
                           Text(
-                            'Phone: +91 ${invoice.clientPhone}',
+                            'Phone: ${invoice.clientPhone}',
                             style: theme.textTheme.bodyLarge,
                           ),
                         const SizedBox(height: 20),

@@ -8,7 +8,19 @@ class BusinessRepo {
 
   Future<void> saveBusinessInfo(Business business) async {
     try {
-      await _businessBox.put(0, business);
+      Business? fetchedData = getBusinessInfo();
+      if (fetchedData == null) {
+        fetchedData = business;
+      } else {
+        fetchedData.address = business.address;
+        fetchedData.email = business.email;
+        fetchedData.globalInvoiceNumber = business.globalInvoiceNumber;
+        fetchedData.gstin = business.gstin;
+        fetchedData.name = business.name;
+        fetchedData.phone = business.phone;
+      }
+      // _businessBox.putAt(0, business);
+      await _businessBox.put(0, fetchedData);
     } catch (err) {
       rethrow;
     }
