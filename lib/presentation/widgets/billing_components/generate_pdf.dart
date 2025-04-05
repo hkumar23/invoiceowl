@@ -139,91 +139,105 @@ abstract class GeneratePdf {
                 crossAxisAlignment: pw.CrossAxisAlignment.start,
                 children: [
                   pw.Column(
-                      crossAxisAlignment: pw.CrossAxisAlignment.start,
-                      children: [
-                        pw.Text(
-                          'Invoice',
-                          style: defaultTextStyle.copyWith(
-                            fontSize: 36,
-                            fontWeight: pw.FontWeight.bold,
-                          ),
+                    crossAxisAlignment: pw.CrossAxisAlignment.start,
+                    children: [
+                      pw.Text(
+                        'Invoice',
+                        style: defaultTextStyle.copyWith(
+                          fontSize: 36,
+                          fontWeight: pw.FontWeight.bold,
                         ),
-                        pw.SizedBox(height: 10),
-                        // User Information
-                        // pw.Text('Contact us',
-                        //     style: defaultTextStyle.copyWith(
-                        //         fontSize: 20, fontWeight: pw.FontWeight.bold)),
-                        if (business != null &&
-                            business.name != null &&
-                            business.name!.isNotEmpty)
-                          pw.Text(
-                            business.name!,
-                            style: defaultTextStyle.copyWith(
-                              fontSize: 20,
-                              fontWeight: pw.FontWeight.bold,
-                            ),
-                          ),
-                        if (business != null &&
-                            business.address != null &&
-                            business.address!.isNotEmpty)
-                          pw.Text(
-                            'Address: ${business.address}',
-                            style: defaultTextStyle,
-                          ),
-                        if (business != null &&
-                            business.email != null &&
-                            business.email!.isNotEmpty)
-                          pw.Text(
-                            'Email: ${business.email}',
-                            style: defaultTextStyle,
-                          ),
-                        if (business != null &&
-                            business.phone != null &&
-                            business.phone!.isNotEmpty)
-                          pw.Text(
-                            'Phone: ${business.phone}',
-                            style: defaultTextStyle,
-                          ),
-                        if (business != null &&
-                            business.gstin != null &&
-                            business.gstin!.isNotEmpty)
-                          pw.Text(
-                            'GSTIN / TIN : ${business.gstin}',
-                            style: defaultTextStyle,
-                          ),
-                        pw.SizedBox(height: 10),
-
-                        // Client Details
+                      ),
+                      // User Information
+                      // pw.Text('Contact us',
+                      //     style: defaultTextStyle.copyWith(
+                      //         fontSize: 20, fontWeight: pw.FontWeight.bold)),
+                      pw.SizedBox(height: 9),
+                      if (business != null &&
+                          business.name != null &&
+                          business.name!.isNotEmpty)
                         pw.Text(
-                          'Bill To',
+                          business.name!,
                           style: defaultTextStyle.copyWith(
                             fontSize: 20,
                             fontWeight: pw.FontWeight.bold,
                           ),
                         ),
+                      if (business != null &&
+                          business.address != null &&
+                          business.address!.isNotEmpty)
                         pw.Text(
-                          'Name: ${invoice.clientName}',
+                          'Address: ${business.address}',
                           style: defaultTextStyle,
                         ),
-                        if (invoice.clientAddress != null)
-                          pw.Text(
-                            'Address: ${invoice.clientAddress}',
-                            style: defaultTextStyle,
-                          ),
-                        if (invoice.clientEmail != null)
-                          pw.Text(
-                            'Email: ${invoice.clientEmail}',
-                            style: defaultTextStyle,
-                          ),
-                        if (invoice.clientPhone != null)
-                          pw.Text(
-                            'Phone: ${invoice.clientPhone}',
-                            style: defaultTextStyle,
-                          ),
-                      ]),
+                      if (business != null &&
+                          business.email != null &&
+                          business.email!.isNotEmpty)
+                        pw.Text(
+                          'Email: ${business.email}',
+                          style: defaultTextStyle,
+                        ),
+                      if (business != null &&
+                          business.phone != null &&
+                          business.phone!.isNotEmpty)
+                        pw.Text(
+                          'Phone: ${business.phone}',
+                          style: defaultTextStyle,
+                        ),
+                      if (business != null &&
+                          business.gstin != null &&
+                          business.gstin!.isNotEmpty)
+                        pw.Text(
+                          'GSTIN / TIN : ${business.gstin}',
+                          style: defaultTextStyle,
+                        ),
+                      // Invoice Details
+                      pw.SizedBox(height: 5),
+                      pw.Text(
+                        'Invoice ID: ${AppConstants.invoiceIdPrefix}${invoice.invoiceNumber}',
+                        style: defaultTextStyle,
+                      ),
+                      pw.Text(
+                        'Invoice Date: ${DateFormat('dd MMM yyyy').format(invoice.invoiceDate!)}',
+                        style: defaultTextStyle,
+                      ),
+                      pw.Text(
+                        'Payment Method: ${invoice.paymentMethod ?? AppConstants.notMentioned}',
+                        style: defaultTextStyle,
+                      ),
+                    ],
+                  ),
                   pw.Column(
                     crossAxisAlignment: pw.CrossAxisAlignment.start,
                     children: [
+                      // Client Details
+                      pw.SizedBox(height: 46),
+                      pw.Text(
+                        'Bill To',
+                        style: defaultTextStyle.copyWith(
+                          fontSize: 20,
+                          fontWeight: pw.FontWeight.bold,
+                        ),
+                      ),
+                      pw.Text(
+                        'Name: ${invoice.clientName}',
+                        style: defaultTextStyle,
+                      ),
+                      if (invoice.clientAddress != null)
+                        pw.Text(
+                          'Address: ${invoice.clientAddress}',
+                          style: defaultTextStyle,
+                        ),
+                      if (invoice.clientEmail != null)
+                        pw.Text(
+                          'Email: ${invoice.clientEmail}',
+                          style: defaultTextStyle,
+                        ),
+                      if (invoice.clientPhone != null)
+                        pw.Text(
+                          'Phone: ${invoice.clientPhone}',
+                          style: defaultTextStyle,
+                        ),
                       // pw.Row(
                       //   mainAxisAlignment: pw.MainAxisAlignment.end,
                       //   children: [
@@ -252,21 +266,6 @@ abstract class GeneratePdf {
                       //     ),
                       //   ],
                       // ),
-
-                      pw.SizedBox(height: 46),
-                      // Invoice Details
-                      pw.Text(
-                        'Invoice ID: ${AppConstants.invoiceIdPrefix}${invoice.invoiceNumber}',
-                        style: defaultTextStyle,
-                      ),
-                      pw.Text(
-                        'Invoice Date: ${DateFormat('dd MMM yyyy').format(invoice.invoiceDate!)}',
-                        style: defaultTextStyle,
-                      ),
-                      pw.Text(
-                        'Payment Method: ${invoice.paymentMethod ?? AppConstants.notMentioned}',
-                        style: defaultTextStyle,
-                      ),
                     ],
                   ),
                 ]),

@@ -19,8 +19,8 @@ class BillingBloc extends Bloc<BillingEvent, BillingState> {
     DeleteInvoiceEvent event,
     Emitter<BillingState> emit,
   ) async {
+    emit(BillingLoadingState());
     try {
-      emit(BillingLoadingState());
       final invoiceRepo = InvoiceRepo();
       await invoiceRepo.deleteInvoice(event.invoice.docId!);
       emit(InvoiceDeletedState());

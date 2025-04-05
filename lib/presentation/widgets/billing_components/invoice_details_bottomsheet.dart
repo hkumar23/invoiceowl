@@ -393,9 +393,50 @@ abstract class InvoiceBottomsheet {
                     alignment: Alignment.bottomLeft,
                     child: GestureDetector(
                       onTap: () {
-                        context
-                            .read<BillingBloc>()
-                            .add(DeleteInvoiceEvent(invoice: invoice));
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            content: const Text(
+                                "Do you want to delete this invoice ?"),
+                            actions: [
+                              FilledButton(
+                                // style: const ButtonStyle(
+                                //   backgroundColor: WidgetStatePropertyAll(
+                                //     Colors.grey,
+                                //   ),
+                                //   foregroundColor: WidgetStatePropertyAll(
+                                //     Colors.white,
+                                //   ),
+                                // ),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                  context.read<BillingBloc>().add(
+                                      DeleteInvoiceEvent(invoice: invoice));
+                                },
+                                child: const Text(
+                                  "Yes",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              FilledButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text(
+                                  "No",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                        // if(isDelete){
+
+                        // }
                       },
                       child: Container(
                         padding: const EdgeInsets.all(8),
