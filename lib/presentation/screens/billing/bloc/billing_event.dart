@@ -29,6 +29,15 @@ class AddBillItemEvent extends BillingEvent {
   });
 }
 
+class DeleteBillItemEvent extends BillingEvent {
+  final String itemDocId;
+  List<BillItem> billItemList;
+  DeleteBillItemEvent({
+    required this.itemDocId,
+    required this.billItemList,
+  });
+}
+
 class UploadInvoicesToFirebaseEvent extends BillingEvent {}
 
 class FetchInvoiceFromFirebaseToLocalEvent extends BillingEvent {}

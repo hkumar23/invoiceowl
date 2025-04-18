@@ -23,6 +23,8 @@ class BillItem {
   double? discount;
   @HiveField(5)
   final double? totalPrice;
+  @HiveField(6)
+  final String docId;
 
   BillItem({
     required this.itemName,
@@ -31,10 +33,12 @@ class BillItem {
     this.tax,
     this.discount,
     required this.totalPrice,
+    required this.docId,
   });
 
   Map<String, dynamic> toJson() {
     return {
+      AppConstants.docId: docId,
       AppConstants.itemName: itemName,
       AppConstants.quantity: quantity,
       AppConstants.unitPrice: unitPrice,
@@ -46,6 +50,7 @@ class BillItem {
 
   factory BillItem.fromJson(Map<String, dynamic> json) {
     return BillItem(
+      docId: json[AppConstants.docId],
       itemName: json[AppConstants.itemName] as String,
       quantity: json[AppConstants.quantity] as int,
       unitPrice: double.parse(json[AppConstants.unitPrice].toString()),

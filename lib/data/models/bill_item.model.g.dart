@@ -23,13 +23,14 @@ class BillItemAdapter extends TypeAdapter<BillItem> {
       tax: fields[3] as double?,
       discount: fields[4] as double?,
       totalPrice: fields[5] as double?,
+      docId: fields[6] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, BillItem obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.itemName)
       ..writeByte(1)
@@ -41,7 +42,9 @@ class BillItemAdapter extends TypeAdapter<BillItem> {
       ..writeByte(4)
       ..write(obj.discount)
       ..writeByte(5)
-      ..write(obj.totalPrice);
+      ..write(obj.totalPrice)
+      ..writeByte(6)
+      ..write(obj.docId);
   }
 
   @override

@@ -357,14 +357,14 @@ abstract class GeneratePdf {
             pw.Align(
               alignment: pw.Alignment.bottomCenter,
               child: pw.Text(
-                "Generated with Invoice Owl - Free Invoice maker",
+                "Generated with Invoice Owl - Easy Invoice and receipt maker",
                 style: defaultTextStyle.copyWith(color: PdfColors.blueGrey),
               ),
             ),
             pw.Align(
               alignment: pw.Alignment.bottomCenter,
               child: pw.Text(
-                "Get the app on Play Store!",
+                "App available on Play Store!",
                 style: defaultTextStyle.copyWith(color: PdfColors.blueGrey),
               ),
             ),

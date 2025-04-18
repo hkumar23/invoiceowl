@@ -14,7 +14,28 @@ class BillingBloc extends Bloc<BillingEvent, BillingState> {
     on<GenerateInvoiceEvent>(_onGenerateInvoiceEvent);
     on<GeneratePdfEvent>(_onGeneratePdfEvent);
     on<DeleteInvoiceEvent>(_onDeleteInvoiceEvent);
+    on<DeleteBillItemEvent>(_onDeleteBillItemEvent);
   }
+  void _onDeleteBillItemEvent(
+    DeleteBillItemEvent event,
+    Emitter<BillingState> emit,
+  ) {
+    emit(BillingLoadingState());
+    try {
+      event.billItemList.removeWhere((item) {
+        return item.docId == event.itemDocId;
+      });
+      emit(BillItemDeletedState(billItems: event.billItemList));
+    } catch (err) {
+      debugPrint(err.toString());
+      emit(
+        BillingErrorState(
+          errorMessage: err.toString(),
+        ),
+      );
+    }
+  }
+
   void _onDeleteInvoiceEvent(
     DeleteInvoiceEvent event,
     Emitter<BillingState> emit,

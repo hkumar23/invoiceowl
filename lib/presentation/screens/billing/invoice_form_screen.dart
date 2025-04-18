@@ -198,14 +198,17 @@ class _InvoiceFormScreenState extends State<InvoiceFormScreen> {
                         Column(
                           children: billItems.map((item) {
                             return BillItemTile(
-                              billItem: BillItem(
-                                itemName: item.itemName,
-                                quantity: item.quantity,
-                                unitPrice: item.unitPrice,
-                                totalPrice: item.totalPrice,
-                                discount: item.discount,
-                                tax: item.tax,
-                              ),
+                              billItem: item,
+                              billItemList: billItems,
+                              // billItem: BillItem(
+                              //   docId: item.docId,
+                              //   itemName: item.itemName,
+                              //   quantity: item.quantity,
+                              //   unitPrice: item.unitPrice,
+                              //   totalPrice: item.totalPrice,
+                              //   discount: item.discount,
+                              //   tax: item.tax,
+                              // ),
                             );
                           }).toList(),
                         ),

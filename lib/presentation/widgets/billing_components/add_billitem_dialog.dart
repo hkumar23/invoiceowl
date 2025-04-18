@@ -46,6 +46,7 @@ class AddBillitemDialog extends StatelessWidget {
     totalPrice = double.parse(totalPrice.toStringAsFixed(2));
 
     billItems.add(BillItem(
+      docId: DateTime.now().toString(),
       itemName: _itemNameController.text,
       quantity: qty,
       unitPrice: unitPrice,

@@ -12,7 +12,7 @@ class BillingErrorState extends BillingState {
 }
 
 class BillItemDeletedState extends BillingState {
-  List<BillItem> billItems;
+  List<BillItem>? billItems;
   BillItemDeletedState({required this.billItems});
 }
 
