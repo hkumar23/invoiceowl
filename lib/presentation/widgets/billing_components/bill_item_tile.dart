@@ -147,18 +147,34 @@ class BillItemTile extends StatelessWidget {
                 );
               },
               child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 1),
+                // margin: const EdgeInsets.only(left: 5),
                 decoration: const BoxDecoration(
                   color: Colors.red,
                   borderRadius: BorderRadius.all(
-                    Radius.circular(5),
+                    Radius.circular(50),
                   ),
                 ),
                 child: const Icon(
                   Icons.close,
-                  size: 20,
+                  size: 17,
                 ),
               ),
             ),
+            // child: IconButton(
+            //   alignment: Alignment.topCenter,
+            //   padding: const EdgeInsets.all(0),
+            //   onPressed: () {
+            //     BlocProvider.of<BillingBloc>(context).add(
+            //       DeleteBillItemEvent(
+            //         itemDocId: billItem.docId,
+            //         billItemList: billItemList,
+            //       ),
+            //     );
+            //   },
+            //   icon: const Icon(Icons.cancel),
+            //   color: Colors.red,
+            // ),
           ),
         ],
       ),
