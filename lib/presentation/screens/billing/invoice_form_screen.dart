@@ -116,6 +116,9 @@ class _InvoiceFormScreenState extends State<InvoiceFormScreen> {
                 text: state.errorMessage,
               );
             }
+            if (state is BillItemDeletedState) {
+              billItems = state.billItems == null ? [] : state.billItems!;
+            }
           },
           builder: (context, state) {
             if (state is BillingLoadingState) {
